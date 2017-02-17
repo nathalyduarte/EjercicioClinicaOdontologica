@@ -8,7 +8,7 @@
  */
 require_once('db_abstract_class.php');
 
-public class Paciente extends db_abstract_class
+class Paciente extends db_abstract_class
 {
 
     private $idPaciente;
@@ -191,27 +191,22 @@ public class Paciente extends db_abstract_class
         $this->Estado = $Estado;
     }
 
-
-
-
-
     protected static function buscarForId($id)
     {
-        $odonto = new Paciente();
+        $pacien = new Paciente();
         if ($id > 0){
-            $getrow = $odonto->getRow("SELECT * FROM odontologos.paciente WHERE idPaciente =?", array($id));
-            $odonto->idodontologos = $getrow['idodontologos'];
-            $odonto->nombres = $getrow['nombres'];
-            $odonto->apellidos = $getrow['apellidos'];
-            $odonto->especialidad = $getrow['especialidad'];
-            $odonto->direccion = $getrow['direccion'];
-            $odonto->celular = $getrow['celular'];
-            $odonto->user = $getrow['user'];
-            $odonto->pass = $getrow['pass'];
-            $odonto->saldo = $getrow['saldo'];
-            $odonto->estado = $getrow['estado'];
-            $odonto->Disconnect();
-            return $odonto;
+            $getrow = $pacien->getRow("SELECT * FROM odontologos.paciente WHERE idPaciente =?", array($id));
+            $pacien->idPaciente = $getrow['idPaciente'];
+            $pacien->Nombres = $getrow['Nombres'];
+            $pacien->Apellidos = $getrow['Apellidos'];
+            $pacien->Documento = $getrow['Documento'];
+            $pacien->TipoDocumento = $getrow['TipoDocumento'];
+            $pacien->Direccion = $getrow['Direccion'];
+            $pacien->Email = $getrow['Email'];
+            $pacien->Genero = $getrow['Genero'];
+            $pacien->Estado = $getrow['Estado'];
+            $pacien->Disconnect();
+            return $pacien;
         }else{
             return NULL;
         }
@@ -225,15 +220,15 @@ public class Paciente extends db_abstract_class
 
         foreach ($getrows as $valor) {
             $pacien = new Paciente();
-            $pacien->idPaciente = $valor['idodontologos'];
-            $pacien->Nombres = $valor['nombres'];
-            $pacien->Apellidos = $valor['apellidos'];
-            $pacien->especialidad = $valor['especialidad'];
-            $pacien->direccion = $valor['direccion'];
-            $pacien->celular = $valor['celular'];
-            $pacien->user = $valor['user'];
-            $pacien->pass = $valor['pass'];
-            $pacien->estado = $valor['estado'];
+            $pacien->idPaciente = $valor['idPaciente'];
+            $pacien->Nombres = $valor['Nombres'];
+            $pacien->Apellidos = $valor['Apellidos'];
+            $pacien->Documento = $valor['Documento'];
+            $pacien->TipoDocumento = $valor['TipoDocumento'];
+            $pacien->Direccion = $valor['Direccion'];
+            $pacien->Email = $valor['Email'];
+            $pacien->Genero = $valor['Genero'];
+            $pacien->Estado = $valor['Estado'];
             array_push($arrPacientes, $pacien);
         }
         $tmp->Disconnect();
@@ -245,10 +240,9 @@ public class Paciente extends db_abstract_class
         return Paciente::buscar("SELECT * FROM odontologos.paciente");
     }
 
-    protected function insertar()
+    public function insertar()
     {
         $this->insertRow("INSERT INTO odontologos.paciente VALUES ('NULL', ?, ?, ?, ?, ?, ?, ?, ?)", array(
-                $this->idPaciente,
                 $this->Nombres,
                 $this->Apellidos,
                 $this->Documento,
