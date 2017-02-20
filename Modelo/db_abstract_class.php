@@ -13,7 +13,7 @@ abstract class db_abstract_class {
     private $username = "root";
     private $password = "";
     private $host = "localhost";
-    private $dbname = "odontologia";
+    private $dbname = "odontologos";
 
     # métodos abstractos para ABM de clases que hereden
     abstract protected static function buscarForId($id);

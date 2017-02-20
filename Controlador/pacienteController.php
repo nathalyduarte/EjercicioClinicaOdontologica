@@ -33,9 +33,10 @@ class pacienteController{
             $arrayPaciente['Estado'] = "Activo";
             $paciente = new Paciente ($arrayPaciente);
             $paciente->insertar();
-            header("Location: ../Vista/registroPaciente.php?respuesta=correcto");
+            //header("Location: ../Vista/registroPaciente.php?respuesta=correcto");
         } catch (Exception $e) {
-            header("Location: ../Vista/registroPaciente.php?respuesta=error");
+            var_dump($e);
+            //header("Location: ../Vista/registroPaciente.php?respuesta=error");
         }
     }
     /*
