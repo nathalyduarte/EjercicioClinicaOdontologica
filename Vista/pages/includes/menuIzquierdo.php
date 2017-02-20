@@ -19,6 +19,9 @@
                             <a href="registroPaciente.php"><i class="fa fa-user fa-fw"></i> Registro Pacientes</a>
                         </li>
                         <li>
+                            <a href="registroEspecialista.php"><i class="fa fa-user fa-fw"></i> Registro Especialista</a>
+                        </li>
+                        <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
