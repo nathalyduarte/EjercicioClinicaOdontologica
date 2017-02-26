@@ -6,7 +6,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b0a20279-9caa-4837-9cfd-9471b15bc05b" name="Default" comment="Ejercicio odontologos">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Modelo/Paciente.php" afterPath="$PROJECT_DIR$/Modelo/Paciente.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -381,12 +380,12 @@
       <workItem from="1487816440228" duration="3144000" />
       <workItem from="1487978862339" duration="683000" />
       <workItem from="1487980916875" duration="7937000" />
-      <workItem from="1488059594630" duration="20016000" />
+      <workItem from="1488059594630" duration="20043000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65516000" />
+    <option name="totallyTimeSpent" value="65543000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="0" />
