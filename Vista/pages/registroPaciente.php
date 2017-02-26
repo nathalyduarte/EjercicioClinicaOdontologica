@@ -23,6 +23,21 @@
 
         <div id="page-wrapper">
             <div class="row">
+
+                <div id="alertas">
+                    <?php if(!empty($_GET["respuesta"]) && $_GET["respuesta"] == "correcto"){ ?>
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            La informacion del paciente se ha registrado correctamente. Puede administrar los pacientes desde <a href="adminPacientes.php" class="alert-link">Aqui</a> .
+                        </div>
+                    <?php } ?>
+                    <?php if(!empty($_GET["respuesta"]) && $_GET["respuesta"] == "error"){ ?>
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            No se pudo registrar al paciente. <a href="#" class="alert-link">Error: <?php echo $_GET["Mensaje"] ?></a> .
+                        </div>
+                    <?php } ?>
+                </div>
                 <div class="col-lg-12">
                     <h1 class="page-header">Registro Paciente</h1>
                 </div>
@@ -40,34 +55,32 @@
                                 <div class="col-lg-12">
                                     <form role="form" method="post" action="../../Controlador/pacienteController.php?action=crear">
                                         <div class="form-group">
-                                            <label>Nombres</label>
-                                            <input required maxlength="60" id="Nombres" name="Nombres" minlength="2" class="form-control" placeholder="Ingrese Sus Nombres Completos">
+                                            <label>Nombre</label>
+                                            <input required maxlength="60" id="Nombre" name="Nombre" minlength="2" class="form-control" placeholder="Ingrese Sus Nombres Completos">
                                         </div>
                                         <div class="form-group">
                                             <label>Apellidos</label>
                                             <input required maxlength="60" id="Apellidos" name="Apellidos" minlength="2" class="form-control" placeholder="Ingrese Sus Apellidos Completos">
                                         </div>
                                         <div class="form-group">
-                                            <label>Direccion</label>
-                                            <input required maxlength="60" id="Direccion" name="Direccion" minlength="7" class="form-control" placeholder="Ingrese su direccion de residencia">
+                                            <label>Documento</label>
+                                            <input type="number" required max="3000000000" min="1000000" maxlength="12" id="Documento" name="Documento" minlength="7" class="form-control" placeholder="Ingrese Documento Completo">
                                         </div>
-
                                         <div class="form-group">
                                             <label>Tipo Documento</label>
                                             <select required id="TipoDocumento" name="TipoDocumento" class="form-control">
                                                 <option>Seleccione</option>
-                                                <option value="C.C">Cedula de Ciudadania</option>
-                                                <option value="T.I">Tarjeta de Identidad</option>
-                                                <option value="C.E">Cedula de Extranjeria</option>
+                                                <option value="CedulaCiudadania">Cedula de Ciudadania</option>
+                                                <option value="TarjetaIdentidad">Tarjeta de Identidad</option>
+                                                <option value="CedulaExtranjeria">Cedula de Extranjeria</option>
                                                 <option value="RegistroCivil">Registro Civil</option>
-                                                <option value="RUT">Registro Unico Tributario</option>
+                                                <option value="RegistroUnicoTributario">Registro Unico Tributario</option>
                                                 <option value="Otro">Otro</option>
                                             </select>
                                         </div>
-
                                         <div class="form-group">
-                                            <label>Documento</label>
-                                            <input type="number" required max="3000000000" min="1000000" maxlength="12" id="Documento" name="Documento" minlength="7" class="form-control" placeholder="Ingrese Documento Completo">
+                                            <label>Direccion</label>
+                                            <input required maxlength="60" id="Direccion" name="Direccion" minlength="7" class="form-control" placeholder="Ingrese su direccion de residencia">
                                         </div>
 
                                         <label>Email</label>

@@ -13,14 +13,20 @@ class Especialista extends db_abstract_class
 
     private $idEspecialista;
     private $Tipo;
-    private $Nombres;
-    private $Apellidos;
+    private $Nombre;
+    private $Apellido;
     private $Documento;
     private $TipoDocumento;
-    private $Direccion;
     private $Email;
+    private $Direccion;
     private $Genero;
     private $Telefono;
+    private $Estado;
+
+
+
+
+
 
     public function __construct($odontologos_data=array())
     {
@@ -32,14 +38,15 @@ class Especialista extends db_abstract_class
         }else {
             $this->idEspecialista = "";
             $this->Tipo = "";
-            $this->Nombres = "";
-            $this->Apellidos = "";
+            $this->Nombre = "";
+            $this->Apellido = "";
             $this->Documento = "";
             $this->TipoDocumento = "";
-            $this->Direccion = "";
             $this->Email = "";
+            $this->Direccion = "";
             $this->Genero = "";
             $this->Telefono = "";
+            $this->Estado = "";
 
         }
     }
@@ -86,33 +93,33 @@ class Especialista extends db_abstract_class
     /**
      * @return mixed
      */
-    public function getNombres()
+    public function getNombre()
     {
-        return $this->Nombres;
+        return $this->Nombre;
     }
 
     /**
      * @param mixed $Nombres
      */
-    public function setNombres($Nombres)
+    public function setNombre($Nombre)
     {
-        $this->Nombres = $Nombres;
+        $this->Nombre = $Nombre;
     }
 
     /**
      * @return mixed
      */
-    public function getApellidos()
+    public function getApellido()
     {
-        return $this->Apellidos;
+        return $this->Apellido;
     }
 
     /**
-     * @param mixed $Apellidos
+     * @param mixed $Apellido
      */
-    public function setApellidos($Apellidos)
+    public function setApellido($Apellido)
     {
-        $this->Apellidos = $Apellidos;
+        $this->Apellido = $Apellido;
     }
 
     /**
@@ -150,33 +157,33 @@ class Especialista extends db_abstract_class
     /**
      * @return mixed
      */
-    public function getDireccion()
-    {
-        return $this->Direccion;
-    }
-
-    /**
-     * @param mixed $Direccion
-     */
-    public function setDireccion($Direccion)
-    {
-        $this->Direccion = $Direccion;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getEmail()
     {
         return $this->Email;
     }
 
     /**
-     * @param mixed $Email
+     * @param mixed $Direccion
      */
     public function setEmail($Email)
     {
         $this->Email = $Email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDireccion()
+    {
+        return $this->Direccion;
+    }
+
+    /**
+     * @param mixed $Email
+     */
+    public function setDireccion($Direccion)
+    {
+        $this->Email = $Direccion;
     }
 
     /**
@@ -211,21 +218,35 @@ class Especialista extends db_abstract_class
         $this->Telefono = $Telefono;
     }
 
-    protected static function buscarForId($id)
+    public function getEstado()
+    {
+        return $this->Estado;
+    }
+
+    /**
+     * @param mixed $$this->Telefono
+     */
+    public function setEstado($Estado)
+    {
+        $this->Estado = $Estado;
+    }
+
+    public static function buscarForId($id)
     {
         $Espec = new Especialista();
         if ($id > 0){
             $getrow = $Espec->getRow("SELECT * FROM odontologos.Especialista WHERE idEspecialista =?", array($id));
             $Espec->idEspecialista = $getrow['idEspecialista'];
             $Espec->Tipo = $getrow['Tipo'];
-            $Espec->Nombres = $getrow['Nombres'];
-            $Espec->Apellidos = $getrow['Apellidos'];
+            $Espec->Nombre = $getrow['Nombre'];
+            $Espec->Apellido = $getrow['Apellido'];
             $Espec->Documento = $getrow['Documento'];
             $Espec->TipoDocumento = $getrow['TipoDocumento'];
-            $Espec->Direccion = $getrow['Direccion'];
             $Espec->Email = $getrow['Email'];
+            $Espec->Direccion = $getrow['Direccion'];
             $Espec->Genero = $getrow['Genero'];
             $Espec->Telefono= $getrow['Telefono'];
+            $Espec->Estado= $getrow['Estado'];
             $Espec->Disconnect();
             return $Espec;
         }else{
@@ -243,61 +264,78 @@ class Especialista extends db_abstract_class
             $Espec = new Especialista();
             $Espec->idEspecialista = $valor['idEspecialista'];
             $Espec->Tipo = $valor['Tipo'];
-            $Espec->Nombres = $valor['Nombres'];
-            $Espec->Apellidos = $valor['Apellidos'];
+            $Espec->Nombre = $valor['Nombre'];
+            $Espec->Apellido = $valor['Apellido'];
             $Espec->Documento = $valor['Documento'];
             $Espec->TipoDocumento = $valor['TipoDocumento'];
-            $Espec->Direccion = $valor['Direccion'];
             $Espec->Email = $valor['Email'];
+            $Espec->Direccion = $valor['Direccion'];
             $Espec->Genero = $valor['Genero'];
             $Espec->Telefono = $valor['Telefono'];
+            $Espec->Estado = $valor['Estado'];
             array_push($arrEspecialistas, $Espec);
         }
         $tmp->Disconnect();
         return $arrEspecialistas;
     }
 
-    protected static function getAll()
+    public static function getAll()
     {
         return Especialista::buscar("SELECT * FROM odontologos.Especialista");
     }
 
     public function insertar()
     {
-        $this->insertRow("INSERT INTO odontologos.Especialista VALUES ('NULL', ?, ?, ?, ?, ?, ?, ?, ?, ?)", array(
+        $this->insertRow("INSERT INTO odontologos.Especialista VALUES ('NULL', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array(
                 $this->Tipo,
-                $this->Nombres,
-                $this->Apellidos,
+                $this->Nombre,
+                $this->Apellido,
                 $this->Documento,
                 $this->TipoDocumento,
-                $this->Direccion,
                 $this->Email,
+                $this->Direccion,
                 $this->Genero,
-                $this->Telefono
+                $this->Telefono,
+                $this->Estado,
             )
         );
         $this->Disconnect();
     }
 
-    protected function editar()
+public function editar()
     {
 
         $arrUser = (array) $this;
-        $this->updateRow("UPDATE odontologos.Especialista SET Nombre = ?, Apellidos = ?, Documento = ?, TipoDocumento = ?, Direccion = ?, Email = ?, Genero = ?, $this->Telefono = ? WHERE idEspecialista = ?", array(
-            $this->idEspecialista,
+        $this->updateRow("UPDATE odontologos.Especialista SET Tipo=?, Nombre = ?, Apellido = ?, Documento = ?, TipoDocumento = ?, Email = ?, Direccion = ?,Genero = ?, Telefono = ?, $this->Estado = ? WHERE idEspecialista = ?", array(
+
             $this->Tipo,
-            $this->Nombres,
-            $this->Apellidos,
+            $this->Nombre,
+            $this->Apellido,
             $this->Documento,
             $this->TipoDocumento,
-            $this->Direccion,
             $this->Email,
+            $this->Direccion,
             $this->Genero,
-            $this->Telefono
+            $this->Telefono,
+            $this->Estado,
+            $this->idEspecialista,
         ));
         $this->Disconnect();
 
     }
+
+
+
+    public function getObjectPaciente(){
+        return Paciente::buscarForId($this->idPaciente);
+    }
+    public function getObjectEspecialista(){
+        return Especialista::buscarForId($this->idEspecialista);
+    }
+
+    function getCitas(){
+        $arrCitas = "SELECT * FROM odontologos.cita WHERE idEspecialista=".$this->idEspecialista;
+}
 
     protected function eliminar($id)
     {

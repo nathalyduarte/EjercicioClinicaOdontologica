@@ -13,14 +13,48 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="#"><i class="fa fa-user fa-fw"></i> Citas<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="registroCita.php"><i class="fa fa-user fa-fw"></i> Registro Citas</a>
+
+                                </li>
+                                <li>
+                                    <a href="adminCita.php"><i class="fa fa-key fa-fw"></i> Administrar Citas</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="registroPaciente.php"><i class="fa fa-user fa-fw"></i> Registro Pacientes</a>
+                            <a href="#"><i class="fa fa-user fa-fw"></i> Pacientes<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="registroPaciente.php"><i class="fa fa-user fa-fw"></i> Registro Pacientes</a>
+                                </li>
+                                <li>
+                                    <a href="adminPacientes.php"><i class="fa fa-key fa-fw"></i> Administrar Pacientes</a>
+                                </li>
+
+
+                            </ul>
+                            <!-- /.nav-second-level -->
                         </li>
+
                         <li>
-                            <a href="registroEspecialista.php"><i class="fa fa-user fa-fw"></i> Registro Especialista</a>
+                            <a href="#"><i class="fa fa-user fa-fw"></i> Especialista<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="registroEspecialista.php"><i class="fa fa-user fa-fw"></i> Registro Especialista</a>
+                                </li>
+                                <li>
+                                    <a href="adminEspecialista.php"><i class="fa fa-key fa-fw"></i> Administrar Especialista</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
                         </li>
+
+
+
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">

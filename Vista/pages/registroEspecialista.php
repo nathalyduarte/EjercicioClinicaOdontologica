@@ -23,6 +23,21 @@
 
     <div id="page-wrapper">
         <div class="row">
+
+            <div id="alertas">
+                <?php if(!empty($_GET["respuesta"]) && $_GET["respuesta"] == "correcto"){ ?>
+                    <div class="alert alert-success alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        La informacion del especialista se ha registrado correctamente. Puede administrar los especialistas desde <a href="adminEspecialista.php" class="alert-link">Aqui</a> .
+                    </div>
+                <?php } ?>
+                <?php if(!empty($_GET["respuesta"]) && $_GET["respuesta"] == "error"){ ?>
+                    <div class="alert alert-danger alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        No se pudo registrar al especialista. <a href="#" class="alert-link">Error: <?php echo $_GET["Mensaje"] ?></a> .
+                    </div>
+                <?php } ?>
+            </div>
             <div class="col-lg-12">
                 <h1 class="page-header">Registro Especialista</h1>
             </div>
@@ -46,24 +61,28 @@
                                             <option>Seleccione</option>
                                             <option value="Ortodoncista">Ortodoncista</option>
                                             <option value="Endodoncista">Endodoncista</option>
-                                           <!-- <option value="Protesista">Protesista</option>
-                                            <option value="Cirugano Oral">Cirugano Oral</option>
-                                            <option value="Odontopediatria">Odontopediatria</option>
+                                            <option value="Anastesiologo">Anastesiologo</option>
+                                            <option value="Periodoncista">Periodoncista</option>
+                                            <option value="Higienista Oral">Higienista Oral</option>
+                                            <option value="Protesista">Protesista</option>
+                                            <option value="Cirujano Oral">Cirujano Oral</option>
+                                            <option value="Ortodoncista">Ortodoncista</option>
+                                            <option value="Odontopediatra">Odontopediatra</option>
                                             <option value="Otro">Otro</option>-->
                                         </select>
                                     </div>
                                     <div class="form-group">
 
                                         <label>Nombres</label>
-                                        <input required maxlength="60" id="Nombres" name="Nombres" minlength="2" class="form-control" placeholder="Ingrese Sus Nombres Completos">
+                                        <input required maxlength="60" id="Nombre" name="Nombre" minlength="2" class="form-control" placeholder="Ingrese Sus Nombres Completos">
                                     </div>
                                     <div class="form-group">
                                         <label>Apellidos</label>
-                                        <input required maxlength="60" id="Apellidos" name="Apellidos" minlength="2" class="form-control" placeholder="Ingrese Sus Apellidos Completos">
+                                        <input required maxlength="60" id="Apellido" name="Apellido" minlength="2" class="form-control" placeholder="Ingrese Sus Apellidos Completos">
                                     </div>
                                     <div class="form-group">
-                                        <label>Direccion</label>
-                                        <input required maxlength="60" id="Direccion" name="Direccion" minlength="7" class="form-control" placeholder="Ingrese su direccion de residencia">
+                                        <label>Documento</label>
+                                        <input type="number" required max="3000000000" min="1000000" maxlength="12" id="Documento" name="Documento" minlength="7" class="form-control" placeholder="Ingrese Documento Completo">
                                     </div>
 
                                     <div class="form-group">
@@ -78,18 +97,15 @@
                                             <option value="Otro">Otro</option>
                                         </select>
                                     </div>
-
-                                    <div class="form-group">
-                                        <label>Documento</label>
-                                        <input type="number" required max="3000000000" min="1000000" maxlength="12" id="Documento" name="Documento" minlength="7" class="form-control" placeholder="Ingrese Documento Completo">
-                                    </div>
-
                                     <label>Email</label>
                                     <div class="form-group input-group">
                                         <span class="input-group-addon">@</span>
                                         <input type="email" required maxlength="45" id="Email" name="Email" minlength="7" class="form-control" placeholder="Ingrese su correo electronico">
                                     </div>
-
+                                    <div class="form-group">
+                                        <label>Direccion</label>
+                                        <input required maxlength="60" id="Direccion" name="Direccion" minlength="7" class="form-control" placeholder="Ingrese su direccion de residencia">
+                                    </div>
                                     <div class="form-group">
                                         <label>Genero</label>
                                         <select required id="Genero" name="Genero" class="form-control">

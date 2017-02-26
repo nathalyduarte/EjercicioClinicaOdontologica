@@ -12,7 +12,7 @@ class Paciente extends db_abstract_class
 {
 
     private $idPaciente;
-    private $Nombres;
+    private $Nombre;
     private $Apellidos;
     private $Documento;
     private $TipoDocumento;
@@ -21,16 +21,17 @@ class Paciente extends db_abstract_class
     private $Genero;
     private $Estado;
 
-    public function __construct($odontologos_data=array())
+
+    public function __construct($Odontologos_data=array())
     {
         parent::__construct();
-        if(count($odontologos_data)>1){
-            foreach ($odontologos_data as $campo => $valor){
+        if(count($Odontologos_data)>1){
+            foreach ($Odontologos_data as $campo => $valor){
                 $this->$campo = $valor;
             }
         }else {
             $this->idPaciente = "";
-            $this->Nombres = "";
+            $this->Nombre = "";
             $this->Apellidos = "";
             $this->Documento = "";
             $this->TipoDocumento = "";
@@ -38,6 +39,7 @@ class Paciente extends db_abstract_class
             $this->Email = "";
             $this->Genero = "";
             $this->Estado = "";
+
         }
     }
 
@@ -66,17 +68,17 @@ class Paciente extends db_abstract_class
     /**
      * @return mixed
      */
-    public function getNombres()
+    public function getNombre()
     {
-        return $this->Nombres;
+        return $this->Nombre;
     }
 
     /**
      * @param mixed $Nombres
      */
-    public function setNombres($Nombres)
+    public function setNombre($Nombre)
     {
-        $this->Nombres = $Nombres;
+        $this->Nombre = $Nombre;
     }
 
     /**
@@ -191,13 +193,13 @@ class Paciente extends db_abstract_class
         $this->Estado = $Estado;
     }
 
-    protected static function buscarForId($id)
+    public static function buscarForId($id)
     {
         $pacien = new Paciente();
         if ($id > 0){
-            $getrow = $pacien->getRow("SELECT * FROM odontologos.paciente WHERE idPaciente =?", array($id));
+            $getrow = $pacien->getRow("SELECT * FROM Odontologos.paciente WHERE idPaciente =?", array($id));
             $pacien->idPaciente = $getrow['idPaciente'];
-            $pacien->Nombres = $getrow['Nombres'];
+            $pacien->Nombre = $getrow['Nombre'];
             $pacien->Apellidos = $getrow['Apellidos'];
             $pacien->Documento = $getrow['Documento'];
             $pacien->TipoDocumento = $getrow['TipoDocumento'];
@@ -221,7 +223,7 @@ class Paciente extends db_abstract_class
         foreach ($getrows as $valor) {
             $pacien = new Paciente();
             $pacien->idPaciente = $valor['idPaciente'];
-            $pacien->Nombres = $valor['Nombres'];
+            $pacien->Nombre = $valor['Nombre'];
             $pacien->Apellidos = $valor['Apellidos'];
             $pacien->Documento = $valor['Documento'];
             $pacien->TipoDocumento = $valor['TipoDocumento'];
@@ -232,49 +234,64 @@ class Paciente extends db_abstract_class
             array_push($arrPacientes, $pacien);
         }
         $tmp->Disconnect();
+
         return $arrPacientes;
     }
 
-    protected static function getAll()
+    public static function getAll()
     {
-        return Paciente::buscar("SELECT * FROM odontologos.paciente");
+        return Paciente::buscar("SELECT * FROM Odontologos.paciente");
     }
 
     public function insertar()
     {
-        $this->insertRow("INSERT INTO odontologos.paciente VALUES ('NULL', ?, ?, ?, ?, ?, ?, ?, ?)", array(
-                $this->Nombres,
+        $this->insertRow("INSERT INTO Odontologos.paciente VALUES ('NULL', ?, ?, ?, ?, ?, ?, ?,?)", array(
+                $this->Nombre,
                 $this->Apellidos,
                 $this->Documento,
                 $this->TipoDocumento,
                 $this->Direccion,
                 $this->Email,
                 $this->Genero,
-                $this->Estado
+                $this->Estado,
+
             )
         );
         $this->Disconnect();
     }
 
-    protected function editar()
+    public function editar()
     {
 
         $arrUser = (array) $this;
         $this->updateRow("UPDATE odontologos.paciente SET Nombre = ?, Apellidos = ?, Documento = ?, TipoDocumento = ?, Direccion = ?, Email = ?, Genero = ?, Estado = ? WHERE idPaciente = ?", array(
-            $this->idPaciente,
-            $this->Nombres,
+
+            $this->Nombre,
             $this->Apellidos,
             $this->Documento,
             $this->TipoDocumento,
             $this->Direccion,
             $this->Email,
             $this->Genero,
-            $this->Estado
+            $this->Estado,
+            $this->idPaciente
+
         ));
         $this->Disconnect();
 
+
     }
 
+
+
+
+
+
+    function getCitas ()
+    {
+        $arrCitas = Cita::buscar("SELECT * FROM odontologos.cita WHEN idPaciente = " . $this->idPaciente);
+        return $arrCitas;
+    }
     protected function eliminar($id)
     {
         if ($id > 0){
