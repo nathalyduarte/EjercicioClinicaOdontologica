@@ -20,6 +20,10 @@ require "../../Modelo/Cita.php";
 
     <?php include ("includes/imports.php"); ?>
 
+    <?php include ("../../Controlador/pacienteController.php"); ?>
+    <?php include ("../../Controlador/especialistaController.php"); ?>
+
+
 </head>
 
 <body>
@@ -27,6 +31,7 @@ require "../../Modelo/Cita.php";
 <div id="wrapper">
 
     <?php include ("includes/barra-navegacion.php"); ?>
+    <?php include ("../../Modelo/Cita.php");?>
 
     <div id="page-wrapper">
         <div class="row">
@@ -59,15 +64,15 @@ require "../../Modelo/Cita.php";
                                     </div>
                                 <?php } ?>
                             </div>
-                            <?php if(!isset($_GET["IdPaciente"])){ ?>
+                            <?php if(!isset($_GET["IdCita"])){ ?>
                                 <div class="alert alert-danger alert-dismissable">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                     No se pudo actualizar cita <strong>Error: no se encontro informacion de la cita.</strong> Puede administrar las citas desde <a href="adminCita.php" class="alert-link">Aqui</a>.
                                 </div>
                             <?php }else{
-                                $IdEspecialista = $_GET["IdEspecialista"];
-                                $_SESSION["IdEspecialista"] = $IdEspecialista;
-                                $ObjeEspecialista = Especialista::buscarForId($IdEspecialista);
+                                $IdCita = $_GET["IdCita"];
+                                $_SESSION["IdCita"] = $IdCita;
+                                $ObjeCita = Cita::buscarForId($IdCita);
                                 ?>
                                 <div class="col-lg-12">
                                     <form role="form" method="post" action="../../Controlador/citaController.php?action=editar">
@@ -83,8 +88,17 @@ require "../../Modelo/Cita.php";
                                         </div>
                                         <div class="form-group">
                                             <label>Estado</label>
-                                            <input required value="<?php echo $ObjeCita->getEstado(); ?>" type="text" required max="3000" min="20" maxlength="12" id="Estado" name="Estado" minlength="7" class="form-control" placeholder="Ingrese estado">
-                                        </div>
+                                           <select required id="Estado" name ="Estado" class="form-control">
+                                               <option>Seleccione estado</option>
+                                               <option <?php echo ($ObjeCita ->getEstado()== "Cancelado")? "selectd":"";?> value="Cancelado">Cancelado</option>
+                                               <option <?php echo ($ObjeCita ->getEstado()== "Activa")? "selectd":"";?> value="Activa">Activa</option>
+                                               <option <?php echo ($ObjeCita ->getEstado()== "Suspendida")? "selectd":"";?> value="Suspendida">Suspendida</option>
+                                               <option <?php echo ($ObjeCita ->getEstado()== "Finalizado")? "selectd":"";?> value="Finalizado">Finalizado</option>
+
+
+                                           </select>
+
+                                                </div>
 
                                         <div class="form-group">
                                             <label>Valor</label>
@@ -104,6 +118,15 @@ require "../../Modelo/Cita.php";
                                         <div class="form-group">
                                             <label>Motivo</label>
                                             <input required value="<?php echo $ObjeCita->getMotivo(); ?>" type="text" required max="3000" min="50" maxlength="12" id="Motivo" name="Valor" minlength="7" class="form-control" placeholder="Ingrese motivo">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Paciente</label>
+                                            <?php echo pacienteController::selectPaciente (true,"idPaciente","idPaciente","form-control"); ?>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Especialista</label>
+                                            <?php echo EspecialistaController::selectEspecialista (true,"idEspecialista","idEspecialista","form-control"); ?>
                                         </div>
 
                                         <button type="submit" class="btn btn-primary">Enviar</button>

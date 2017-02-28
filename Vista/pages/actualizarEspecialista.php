@@ -68,25 +68,29 @@ require "../../Modelo/Especialista.php";
                                 $IdEspecialista = $_GET["IdEspecialista"];
                                 $_SESSION["IdEspecialista"] = $IdEspecialista;
                                 $ObjeEspecialista = Especialista::buscarForId($IdEspecialista);
-                                ?><div class="form-group">
-                                    <label>Tipo Especialista</label>
-                                    <select required id="Tipo" name="Tipo" class="form-control">
-                                        <option>Seleccione</option>
 
-                                        <option <?php echo ($ObjeEspecialista->getTipo() == "Ortodoncista") ? "selected" : ""; ?>  value="Ortodoncista">Ortodoncista</option>
-                                        <option <?php echo ($ObjeEspecialista->getTipo() == "Endodoncista") ? "selected" : ""; ?>  value="Endodoncista">Endodoncista</option>
-                                        <option <?php echo ($ObjeEspecialista->getTipo() == "Anastesiologo") ? "selected" : ""; ?>  value="Anastesiologo">Anastesiologo</option>
-                                        <option <?php echo ($ObjeEspecialista->getTipo() == "Periodoncista") ? "selected" : ""; ?>  value="Periodoncista">Periodoncista</option>
-                                        <option <?php echo ($ObjeEspecialista->getTipo() == "'Higienista Oral") ? "selected" : ""; ?>  value="Higienista Oral">Higienista Oral</option>
-                                        <option <?php echo ($ObjeEspecialista->getTipo() == "Protesista") ? "selected" : ""; ?>  value="Protesista">Protesista</option>
-                                        <option <?php echo ($ObjeEspecialista->getTipo() == "Cirujano Oral") ? "selected" : ""; ?>  value="Cirujano Oral">Cirujano Oral</option>
-                                        <option <?php echo ($ObjeEspecialista->getTipo() == "Ortodoncista") ? "selected" : ""; ?>  value="Ortodoncista">Ortodoncista</option>
-                                        <option <?php echo ($ObjeEspecialista->getTipo() == "Odontopediatra") ? "selected" : ""; ?>  value="Odontopediatra">Odontopediatra</option>
-                                    </select>
-                                </div>
+                                ?>
 
                                 <div class="col-lg-12">
                                     <form role="form" method="post" action="../../Controlador/especialistaController.php?action=editar">
+
+                                        <div class="form-group">
+                                            <label>Tipo Especialista</label>
+                                            <select required id="Tipo" name="Tipo" class="form-control">
+                                                <option>Seleccione</option>
+
+                                                <option <?php echo ($ObjeEspecialista->getTipo() == "Ortodoncista") ? "selected" : ""; ?>  value="Ortodoncista">Ortodoncista</option>
+                                                <option <?php echo ($ObjeEspecialista->getTipo() == "Endodoncista") ? "selected" : ""; ?>  value="Endodoncista">Endodoncista</option>
+                                                <option <?php echo ($ObjeEspecialista->getTipo() == "Anastesiologo") ? "selected" : ""; ?>  value="Anastesiologo">Anastesiologo</option>
+                                                <option <?php echo ($ObjeEspecialista->getTipo() == "Periodoncista") ? "selected" : ""; ?>  value="Periodoncista">Periodoncista</option>
+                                                <option <?php echo ($ObjeEspecialista->getTipo() == "Higienista Oral") ? "selected" : ""; ?>  value="Higienista Oral">Higienista Oral</option>
+                                                <option <?php echo ($ObjeEspecialista->getTipo() == "Protesista") ? "selected" : ""; ?>  value="Protesista">Protesista</option>
+                                                <option <?php echo ($ObjeEspecialista->getTipo() == "Cirujano Oral") ? "selected" : ""; ?>  value="Cirujano Oral">Cirujano Oral</option>
+                                                <option <?php echo ($ObjeEspecialista->getTipo() == "Ortodoncista") ? "selected" : ""; ?>  value="Ortodoncista">Ortodoncista</option>
+                                                <option <?php echo ($ObjeEspecialista->getTipo() == "Odontopediatra") ? "selected" : ""; ?>  value="Odontopediatra">Odontopediatra</option>
+
+                                            </select>
+                                        </div>
                                         <div class="form-group">
                                             <label>Nombre</label>
                                             <input required value="<?php echo $ObjeEspecialista->getNombre(); ?>" data-toggle="tooltip" title="Sin Signos de puntuación o caracteres especiales" data-placement="top" maxlength="60" id="Nombre" name="Nombre" minlength="2" class="form-control newTooltip" placeholder="Ingrese Sus Nombres Completos">

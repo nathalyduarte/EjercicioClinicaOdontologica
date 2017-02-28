@@ -306,7 +306,7 @@ public function editar()
     {
 
         $arrUser = (array) $this;
-        $this->updateRow("UPDATE odontologos.Especialista SET Tipo=?, Nombre = ?, Apellido = ?, Documento = ?, TipoDocumento = ?, Email = ?, Direccion = ?,Genero = ?, Telefono = ?, $this->Estado = ? WHERE idEspecialista = ?", array(
+        $this->updateRow("UPDATE odontologos.Especialista SET Tipo=?, Nombre = ?, Apellido = ?, Documento = ?, TipoDocumento = ?, Email = ?, Direccion = ?,Genero = ?, Telefono = ?, Estado = ? WHERE idEspecialista = ?", array(
 
             $this->Tipo,
             $this->Nombre,

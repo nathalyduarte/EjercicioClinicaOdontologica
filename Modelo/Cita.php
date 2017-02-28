@@ -183,7 +183,7 @@ class Cita extends db_abstract_class
      */
 
 
-    protected static function buscarForId($id)
+    public static function buscarForId($id)
     {
         $pacien = new Cita();
         if ($id > 0){
@@ -225,7 +225,7 @@ class Cita extends db_abstract_class
         return $arrCitas;
     }
 
-    protected static function getAll()
+    public static function getAll()
     {
         return Cita::buscar("SELECT * FROM Odontologos.Cita");
     }

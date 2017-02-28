@@ -15,14 +15,14 @@ class EspecialistaController{
             EspecialistaController::crear();
         }else if ($action == "editar"){
             EspecialistaController::editar();
-        }else if ($action == "selectPacientes"){
-            pacienteController::selectPacientes();
-        }else if ($action == "adminTablePacientes"){
-            pacienteController::adminTablePacientes();
-        }else if ($action == "InactivarPaciente"){
-            pacienteController::CambiarEstado("Inactivo");
-        }else if ($action == "ActivarPaciente"){
-            pacienteController::CambiarEstado("Activo");
+        }else if ($action == "selectEspecialista"){
+            especialistaController::selectEspecialista();
+        }else if ($action == "adminTableEspecialista"){
+            especialistaController::adminTableEspecialista();
+        }else if ($action == "InactivarEspecialista"){
+            especialistaController::CambiarEstado("Inactivo");
+        }else if ($action == "ActivarEspecialista"){
+            especialistaController::CambiarEstado("Activo");
 
         }
         /*else if ($action == "buscarID"){
@@ -78,8 +78,9 @@ class EspecialistaController{
         $htmlTable .= "<tbody>";
         foreach ($arrEspecialista as $ObjEspecialista){
             $htmlTable .= "<tr>";
-            //$htmlTable .= "<td>".$ObjPaciente->getIdPaciente()."</td>";
             $htmlTable .= "<td>".$ObjEspecialista->getTipo()."</td>";
+            //$htmlTable .= "<td>".$ObjPaciente->getIdPaciente()."</td>";
+
             $htmlTable .= "<td>".$ObjEspecialista->getNombre()."</td>";
             $htmlTable .= "<td>".$ObjEspecialista->getApellido()."</td>";
             //$htmlTable .= "<td>".$ObjPaciente->getTipoDocumento()."</td>";
@@ -123,16 +124,32 @@ class EspecialistaController{
             $arrayEspecialista['Direccion'] = $_POST['Direccion'];
             $arrayEspecialista['Genero'] = $_POST['Genero'];
             $arrayEspecialista['Telefono'] = $_POST['Telefono'];
-            $arrayEspecialista['Estado'] = 'Activo';
+            $arrayEspecialista['Estado'] = $Estado;
+            $arrayEspecialista["idEspecialista"]= $_SESSION["IdEspecialista"];
             $Especialista = new Especialista ($arrayEspecialista);
+
             $Especialista->editar();
             unset($_SESSION["IdEspecialista"]);
-            //          header("Location: ../Vista/pages/actualizarEspecialista.php?respuesta=correcto&IdEspecialista=".$arrayEspecialista['idEspecialista']);
+                header("Location: ../Vista/pages/actualizarEspecialista.php?respuesta=correcto&IdEspecialista=".$arrayEspecialista['idEspecialista']);
 
         } catch (Exception $e) {
 
             $txtMensaje = $e->getMessage();
-            //header("Location: ../Vista/pages/actualizarEspecialista.php?respuesta=error&Mensaje=".$txtMensaje);
+            header("Location: ../Vista/pages/actualizarEspecialista.php?respuesta=error&Mensaje=".$txtMensaje);
+        }
+    }
+    static public function CambiarEstado ($Estado){
+        try {
+            $idEspecialista = $_GET["IdEspecialista"];
+            $ObjEspecialista = Especialista::buscarForId($idEspecialista);
+            $ObjEspecialista->setEstado($Estado);
+            var_dump($ObjEspecialista);
+            $ObjEspecialista->editar();
+            header("Location: ../Vista/pages/adminEspecialista.php?respuesta=correcto");
+        }catch (Exception $e){
+            //var_dump($e);
+            $txtMensaje = $e->getMessage();
+            header("Location: ../Vista/pages/adminEspecilaista.php?respuesta=error&Mensaje=".$txtMensaje);
         }
     }
 
